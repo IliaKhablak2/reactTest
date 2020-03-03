@@ -15,19 +15,20 @@ function HomeView({ users, posts, deletePost }: { users: any, posts: any, delete
 
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     const [isShown, setisShown] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         function handleResize() {
             setWindowDimensions(getWindowDimensions());
         }
-
         window.addEventListener('resize', handleResize);
+        
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
 
     return (
-        <main className="contanerMy">
+        <main className="containerMy">
             <div className="table-container">
                 <Table>
                     <Table.Head>
@@ -67,12 +68,17 @@ function HomeView({ users, posts, deletePost }: { users: any, posts: any, delete
                     isShown={isShown != null}
                     title="Stop it, take a minute to think!"
                     onCloseComplete={() => setisShown(null)}
-                    // isConfirmLoading={state.isLoading}
-                    onConfirm={() => {
-                        deletePost(isShown);
-                        setisShown(null);
+                    isConfirmLoading={loading}
+                    onConfirm={async () => {
+                        setLoading(true);
+                        let bla = await deletePost(isShown);
+                        if (bla) {
+                            setisShown(null)
+                        } else {
+                            setLoading(false)
+                        }
                     }}
-                    confirmLabel="delete"
+                    confirmLabel={loading ? 'Loading...' : 'Delete'}
                 >
                     Are you sure you want to delete this awesome post!?
                 </Dialog>

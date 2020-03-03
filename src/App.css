@@ -42,30 +42,30 @@ ul {
   color: #fff;
 }
 
-.contanerMy {
+.containerMy {
   padding: 0 0;
 }
 
 @media (min-width: 575.98px) {
-  .contanerMy {
+  .containerMy {
     padding: 0 calc(50% - 270px);
   }
 }
 
 @media (min-width: 767.98px) {
-  .contanerMy {
+  .containerMy {
     padding: 0 calc(50% - 360px);
   }
 }
 
 @media (min-width: 991.98px) {
-  .contanerMy {
+  .containerMy {
     padding: 0 calc(50% - 480px);
   }
 }
 
 @media (min-width: 1199.98px) {
-  .contanerMy {
+  .containerMy {
     padding: 0 calc(50% - 590px);
   }
 }
@@ -87,4 +87,8 @@ ul {
 
 .paddingLeft{
   padding-left: 30px;
+}
+
+.bigText{
+  height:500px;
 }

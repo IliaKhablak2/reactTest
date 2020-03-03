@@ -1,15 +1,4 @@
-// import React, { createContext, useContext, useReducer } from 'react';
 
-// export const StateContext = createContext([]);
-// export const StateProvider = (props: any) => {
-//   const [state, dispatch] = useReducer(props.reducer, props.initialState);
-//   const value = { state, dispatch };
-//   return (
-//     <StateContext.Provider value={value}>{props.children}
-//     </StateContext.Provider>
-//   )
-// };
-// export const useStateValue = () => useContext(StateContext);
 
 import React, { createContext, Dispatch, Reducer, useContext, useReducer } from 'react';
 
@@ -21,6 +10,7 @@ interface Actions {
 interface SidebarProps {
   users: [];
   posts: [];
+  post: any
 }
 
 interface SidebarProviderProps {
@@ -46,8 +36,9 @@ export const StateProvider: React.FC<SidebarProviderProps> = ({ reducer, initSta
 
 const SidebarController: React.FC = ({ children }) => {
   const initState: SidebarProps = {
-    users:[],
-    posts: []
+    users: [],
+    posts: [],
+    post: {}
   };
 
   const reducer: Reducer<SidebarProps, Actions> = (state, action) => {
@@ -61,6 +52,11 @@ const SidebarController: React.FC = ({ children }) => {
         return {
           ...state,
           posts: action.value
+        };
+      case 'setPost':
+        return {
+          ...state,
+          post: action.value
         };
       default:
         return state;
